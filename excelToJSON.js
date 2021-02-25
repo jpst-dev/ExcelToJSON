@@ -15,8 +15,13 @@ document.getElementById("uploadExcel").addEventListener("click", () => {
                 type: "binary"
             })
             workbook.SheetNames.forEach(sheet => {
+                // Escolher a planilha
+                sheet1 = workbook.SheetNames[0]
+                sheet2 = workbook.SheetNames[1]
+                
                 let rowObject = XLSX.utils.sheet_to_row_object_array(
-                    workbook.Sheets[sheet]
+                    workbook.Sheets[sheet1]
+                    
                 );
 
                     var jsonObject = JSON.stringify(rowObject, null, "\t")
@@ -24,9 +29,8 @@ document.getElementById("uploadExcel").addEventListener("click", () => {
                     document.getElementById("jsonData").innerHTML = jsonObject
                     console.log("JSON", jsonObject)
                     console.log("ROW", rowObject)
-                    console.log(sheet)
-
             })
+            
         }
         fileReader.readAsBinaryString(selectedFile)
     }
